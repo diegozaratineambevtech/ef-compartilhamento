@@ -1,0 +1,16 @@
+﻿version: '3.9'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    command: /bin/bash /entrypoint.sh
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SuperSenha2000!
+      - MSSQL_PID=Express
+    hostname: sqlserver      
+    volumes:
+      - ./docker-entrypoint.sh:/entrypoint.sh
+      - ./docker-db-init.sh:/db-init.sh
+      - ./db-init.sql:/db-init.sql
