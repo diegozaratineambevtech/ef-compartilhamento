@@ -72,16 +72,22 @@ namespace EfCompartilhamento.WebApi.Controllers
             {
                 return NotFound("Author does not exists");
             }
-            var book = _bookRepository.GetById(id);
+            var book = _bookRepository.GetWithAuthors(id);
             if (book is null)
             {
                 return NotFound("Book does not exists");
             }
-            //adicionar autor a um livro, o que acontece se adicionar um autor que já está no livro?
-            //como evitar o erro?
-            book.Authors.Add(author);
-            _bookRepository.Update(book);
-            _bookRepository.Save();
+
+            if(!book.Authors.Any(b=>b.Id==authorId))
+            {
+
+                book.Authors.Add(author);
+                _bookRepository.Update(book);
+                _bookRepository.Save();
+            }
+            else{
+                return BadRequest("Author already exists");
+            }
             return Ok();
         }
 

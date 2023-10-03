@@ -15,7 +15,8 @@ namespace EfCompartilhamento.Infrastructure.Repositories
 
         public Author? GetWithBooks(int id)
         {
-              return _context.Set<Author>().Include(a => a.Books).FirstOrDefault(a => a.Id == id);
+            //incluir exemplo de print de querystring
+              return _context.Set<Author>().Include(a=>a.Books).FirstOrDefault(a => a.Id == id);
         }
     }
 }

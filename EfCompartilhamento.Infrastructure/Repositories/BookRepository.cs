@@ -12,9 +12,16 @@ namespace EfCompartilhamento.Infrastructure.Repositories
 {
     public class BookRepository : BaseRepository<Book>, IBookRepository
     {
+        private readonly CompartilhamentoDbContext _context;
         public BookRepository(CompartilhamentoDbContext context) : base(context)
         {
-        }
+            _context = context;
 
+        }
+        public Book? GetWithAuthors(int id)
+        {
+            //incluir exemplo de print de querystring
+            return _context.Set<Book>().Include(a => a.Authors).FirstOrDefault(a => a.Id == id);
+        }
     }
 }

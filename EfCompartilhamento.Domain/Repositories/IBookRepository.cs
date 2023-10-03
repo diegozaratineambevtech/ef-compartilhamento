@@ -9,5 +9,6 @@ namespace EfCompartilhamento.Domain.Repositories
 {
     public interface IBookRepository : IBaseRepository<Book>
     {
+        public Book? GetWithAuthors(int id);
     }
 }
